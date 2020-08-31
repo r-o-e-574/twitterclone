@@ -1,0 +1,12 @@
+<a href="/"><button>Home</butotn></a>
+<br>
+<h1>{{profile.username}}'s Profile</h1>
+<h2>Tweets</h2>
+{% for tweet in tweets %}
+<ul>
+    <h3>{{tweet.twitter_user}}{{tweet.tweet}}</h3>
+</ul>
+{% endfor %}
+<br>
+<br>
+<a href="/logout/"><button>Logout</button></a>
