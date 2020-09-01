@@ -15,16 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from twitteruser.views import index_view, create_user, user_profile
-from authentication import views
-from tweet.views import create_tweet
+from twitteruser import views as twitteruser_views
+from authentication import views as auth_views
+from tweet import views as tweet_views
 
 urlpatterns = [
-    path('', index_view, name="homepage"),
-    path('profile/<int:user_id>/', user_profile, name="profile"),
-    path('createtweet/', create_tweet, name="createtweet"),
-    path('login/', views.login_view, name="login"),
-    path('logout/', views.logout_view, name="logout"),
-    path('signup/', create_user, name="signup"),
+    path('', twitteruser_views.index_view, name="homepage"),
+    path('profile/<int:user_id>/', twitteruser_views.user_profile, name="profile"),
+    path('tweet/<int:tweet_id>/', tweet_views.tweet_view, name="tweet"),
+    path('createtweet/', tweet_views.create_tweet, name="createtweet"),
+    path('following/<int:following_id>/', twitteruser_views.following_view, name="following" ),
+    path('login/', auth_views.login_view, name="login"),
+    path('logout/', auth_views.logout_view, name="logout"),
+    path('signup/', twitteruser_views.create_user, name="signup"),
     path('admin/', admin.site.urls),
 ]

@@ -2,6 +2,11 @@ from django.shortcuts import render, HttpResponseRedirect, reverse
 from tweet import forms, models
 
 # Create your views here.
+def tweet_view(request, tweet_id):
+    tweet = models.Tweet.objects.filter(id=tweet_id).first()
+    return render(request, "tweet.html", {"Tweet":tweet})
+
+
 
 def create_tweet(request):
     #regex to add an @to the username

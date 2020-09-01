@@ -4,9 +4,12 @@
 <br>
 <br>
 {% for tweet in tweets %}
-{{tweet.twitter_user}}
+<ul>
+<a href="/profile/{{tweet.twitter_user.id}}/">@{{tweet.twitter_user}}</a> 
+<a href="/tweet/{{tweet.id}}/">{{tweet.time_date}}</a>
 <br>
 {{tweet.tweet}}
+</ul>
 {% endfor %}
 <br>
 <br>
