@@ -25,6 +25,7 @@ urlpatterns = [
     path('tweet/<int:tweet_id>/', tweet_views.tweet_view, name="tweet"),
     path('createtweet/', tweet_views.create_tweet, name="createtweet"),
     path('following/<int:following_id>/', twitteruser_views.following_view, name="following" ),
+    path('unfollow/<int:unfollow_id>/', twitteruser_views.unfollow_view, name="unfollow" ),
     path('login/', auth_views.login_view, name="login"),
     path('logout/', auth_views.logout_view, name="logout"),
     path('signup/', twitteruser_views.create_user, name="signup"),

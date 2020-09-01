@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'notification',
     'tweet',
     'twitteruser',
-    'crispy_forms'
+    'crispy_forms',
+    'countable_field',
 ]
 
 MIDDLEWARE = [

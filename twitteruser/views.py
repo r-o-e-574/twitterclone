@@ -12,11 +12,14 @@ def index_view(request):
 
 
 def user_profile(request, user_id):
-    profile = models.TwitterUser.objects.filter(id=user_id).first()
+    profile = models.TwitterUser.objects.get(id=user_id)
     tweets = models.Tweet.objects.filter(twitter_user=profile)
+    user_following = request.user.following.all()
+    following_list = list(user_following)
     return render(request, "user_profile.html",
                   {"profile": profile,
                    "tweets": tweets,
+                   "user_following": following_list
                   }
                   )
 
@@ -41,4 +44,11 @@ def following_view(request, following_id):
     current_user = request.user
     follow = models.TwitterUser.objects.filter(id=following_id).first()
     current_user.following.add(follow)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+
+def unfollow_view(request, unfollow_id):
+    current_user = request.user
+    follow = models.TwitterUser.objects.filter(id=unfollow_id).first()
+    current_user.following.remove(follow)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
