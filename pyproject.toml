@@ -7,6 +7,7 @@ authors = ["Ruben Espino <56930001+r-o-e-574@users.noreply.github.com>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 django = "^3.1"
+django-crispy-forms = "^1.9.2"
 
 [tool.poetry.dev-dependencies]
 

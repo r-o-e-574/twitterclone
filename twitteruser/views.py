@@ -7,8 +7,11 @@ from django.contrib.auth import login
 # Create your views here.
 @login_required
 def index_view(request):
-    tweets = models.Tweet.objects.all().order_by('-time_date')
-    return render(request, 'index.html', {"Welcome": "Welcome to TWEETER", "tweets": tweets})
+    tweets = models.Tweet.objects.filter(twitter_user=request.user)
+    following_tweets = models.Tweet.objects.filter(twitter_user__in=request.user.following.all())
+    user_following_tweets = tweets | following_tweets
+    user_following_tweets = user_following_tweets.order_by('-time_date')
+    return render(request, 'index.html', {"Welcome": "Welcome to TWEETER", "tweets": user_following_tweets})
 
 
 def user_profile(request, user_id):

@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'tweet',
     'twitteruser',
     'crispy_forms',
-    'countable_field',
 ]
 
 MIDDLEWARE = [
