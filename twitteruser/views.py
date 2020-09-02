@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from twitteruser import forms, models
 from tweet import models
 from django.contrib.auth import login
+from notification.models import  Notification
 
 # Create your views here.
 @login_required
@@ -11,7 +12,10 @@ def index_view(request):
     following_tweets = models.Tweet.objects.filter(twitter_user__in=request.user.following.all())
     user_following_tweets = tweets | following_tweets
     user_following_tweets = user_following_tweets.order_by('-time_date')
-    return render(request, 'index.html', {"Welcome": "Welcome to TWEETER", "tweets": user_following_tweets})
+    count = len(
+        [notified for notified in Notification.objects.filter(receiver__id=request.user.id) if not notified.viewed_at]
+        )
+    return render(request, 'index.html', {"Welcome": "Welcome to TWEETER", "tweets": user_following_tweets, "count": count})
 
 
 def user_profile(request, user_id):
@@ -42,14 +46,14 @@ def create_user(request):
     form = forms.SignupForm()
     return render(request, "generic_form.html", {"form": form})
 
-
+@login_required
 def following_view(request, following_id):
     current_user = request.user
     follow = models.TwitterUser.objects.filter(id=following_id).first()
     current_user.following.add(follow)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
-
+@login_required
 def unfollow_view(request, unfollow_id):
     current_user = request.user
     follow = models.TwitterUser.objects.filter(id=unfollow_id).first()

@@ -1,6 +1,7 @@
 <h1>{{Welcome}}</h1>
 <a href="/profile/{{user.id}}/"><button>Profile</button></a>
 <a href="/createtweet/"><button>Make Tweet</button></a>
+<a href="/notification/{{user.id}}/"><button>Notifications {{count}}</button></a>
 <br>
 <br>
 {% for tweet in tweets %}
