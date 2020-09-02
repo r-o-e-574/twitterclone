@@ -1,5 +1,6 @@
 import re
 from django.shortcuts import render, HttpResponseRedirect, reverse
+from django.contrib.auth.decorators import login_required
 from tweet import forms, models
 from notification.models import Notification
 from twitteruser.models import TwitterUser
@@ -10,7 +11,7 @@ def tweet_view(request, tweet_id):
     return render(request, "tweet.html", {"Tweet":tweet})
 
 
-
+@login_required
 def create_tweet(request):
     if request.method == "POST":
         form = forms.MakeTweetForm(request.POST)

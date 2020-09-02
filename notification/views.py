@@ -1,8 +1,10 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from notification.models import Notification
 
 # Create your views here.
+@login_required
 def notification_view(request, user_id):
     notifications = Notification.objects.filter(receiver__id=user_id)
     received_notification = []

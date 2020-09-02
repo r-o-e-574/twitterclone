@@ -1,6 +1,7 @@
 <a href="/"><button>Home</button></a>
 
 {% for tweet in rn  %}
-<h3>@{{tweet.twitter_user}} posted on: {{tweet.time_date}}</h3>
-<h3>{{tweet.tweet}}</h3>
+<h4>@{{tweet.twitter_user}} posted on: {{tweet.time_date}}</h4>
+<h4>{{tweet.tweet}}</h4>
+<br>
 {% endfor %}
